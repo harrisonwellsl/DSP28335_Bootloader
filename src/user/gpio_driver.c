@@ -11,20 +11,20 @@ void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function) {
         GpioCtrlRegs.GPAMUX1.all &= ~(0x3 << (gpio_num * 2));
         GpioCtrlRegs.GPAMUX1.all |= mux_function << (gpio_num * 2);
     } else if (gpio_num < 32) {
-        GpioCtrlRegs.GPAMUX2.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPAMUX2.all |= mux_function << (gpio_num * 2);
+        GpioCtrlRegs.GPAMUX2.all &= ~(0x3 << ((gpio_num - 16) * 2));
+        GpioCtrlRegs.GPAMUX2.all |= mux_function << ((gpio_num - 16) * 2);
     } else if (gpio_num < 48) {
-        GpioCtrlRegs.GPBMUX1.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPBMUX1.all |= mux_function << (gpio_num * 2);
+        GpioCtrlRegs.GPBMUX1.all &= ~(0x3 << ((gpio_num - 32) * 2));
+        GpioCtrlRegs.GPBMUX1.all |= mux_function << ((gpio_num - 32) - 48 * 2);
     } else if (gpio_num < 64) {
-        GpioCtrlRegs.GPBMUX2.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPBMUX2.all |= mux_function << (gpio_num * 2);
+        GpioCtrlRegs.GPBMUX2.all &= ~(0x3 << ((gpio_num - 48) * 2));
+        GpioCtrlRegs.GPBMUX2.all |= mux_function << ((gpio_num - 48) * 2);
     } else if (gpio_num < 80) {
-        GpioCtrlRegs.GPCMUX1.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPCMUX1.all |= mux_function << (gpio_num * 2);
+        GpioCtrlRegs.GPCMUX1.all &= ~(0x3 << ((gpio_num - 64) * 2));
+        GpioCtrlRegs.GPCMUX1.all |= mux_function << ((gpio_num - 64) * 2);
     } else {
-        GpioCtrlRegs.GPCMUX2.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPCMUX2.all |= mux_function << (gpio_num * 2);
+        GpioCtrlRegs.GPCMUX2.all &= ~(0x3 << ((gpio_num - 80) * 2));
+        GpioCtrlRegs.GPCMUX2.all |= mux_function << ((gpio_num - 80) * 2);
     }
     EDIS;
 }
@@ -47,11 +47,11 @@ void gpio_set_dir(unsigned int gpio_num, enum DIR_FUNCTIONS dir_function) {
         GpioCtrlRegs.GPADIR.all &= ~(0x1 << gpio_num);
         GpioCtrlRegs.GPADIR.all |= dir_function << gpio_num;
     } else if (gpio_num < 64) {
-        GpioCtrlRegs.GPBDIR.all &= ~(0x1 << gpio_num);
-        GpioCtrlRegs.GPBDIR.all |= dir_function << gpio_num;
+        GpioCtrlRegs.GPBDIR.all &= ~(0x1 << (gpio_num - 32));
+        GpioCtrlRegs.GPBDIR.all |= dir_function << (gpio_num - 32);
     } else {
-        GpioCtrlRegs.GPCDIR.all &= ~(0x1 << gpio_num);
-        GpioCtrlRegs.GPCDIR.all |= dir_function << gpio_num;
+        GpioCtrlRegs.GPCDIR.all &= ~(0x1 << (gpio_num - 64));
+        GpioCtrlRegs.GPCDIR.all |= dir_function << (gpio_num - 64);
     }
     EDIS;
 }
@@ -62,14 +62,14 @@ void gpio_set_qel(unsigned int gpio_num, enum QEL_FUNCTIONS qel_function) {
         GpioCtrlRegs.GPAQSEL1.all &= ~(0x3 << (gpio_num * 2));
         GpioCtrlRegs.GPAQSEL1.all |= qel_function << (gpio_num * 2);
     } else if (gpio_num < 32) {
-        GpioCtrlRegs.GPAQSEL2.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPAQSEL2.all |= qel_function << (gpio_num * 2);
+        GpioCtrlRegs.GPAQSEL2.all &= ~(0x3 << ((gpio_num - 16) * 2));
+        GpioCtrlRegs.GPAQSEL2.all |= qel_function << ((gpio_num - 16) * 2);
     } else if (gpio_num < 48) {
-        GpioCtrlRegs.GPBQSEL1.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPBQSEL1.all |= qel_function << (gpio_num * 2);
+        GpioCtrlRegs.GPBQSEL1.all &= ~(0x3 << ((gpio_num - 32) * 2));
+        GpioCtrlRegs.GPBQSEL1.all |= qel_function << ((gpio_num - 32) * 2);
     } else {
-        GpioCtrlRegs.GPBQSEL2.all &= ~(0x3 << (gpio_num * 2));
-        GpioCtrlRegs.GPBQSEL2.all |= qel_function << (gpio_num * 2);
+        GpioCtrlRegs.GPBQSEL2.all &= ~(0x3 << ((gpio_num - 48) * 2));
+        GpioCtrlRegs.GPBQSEL2.all |= qel_function << ((gpio_num - 48) * 2);
     }
     EDIS;
 }
@@ -80,11 +80,11 @@ void gpio_set_pud(unsigned int gpio_num, enum PUD_FUNCTIONS pud_function) {
         GpioCtrlRegs.GPAPUD.all &= ~(0x1 << gpio_num);
         GpioCtrlRegs.GPAPUD.all |= pud_function << gpio_num;
     } else if (gpio_num < 64) {
-        GpioCtrlRegs.GPBPUD.all &= ~(0x1 << gpio_num);
-        GpioCtrlRegs.GPBPUD.all |= pud_function << gpio_num;
+        GpioCtrlRegs.GPBPUD.all &= ~(0x1 << (gpio_num - 32));
+        GpioCtrlRegs.GPBPUD.all |= pud_function << (gpio_num - 32);
     } else {
-        GpioCtrlRegs.GPCPUD.all &= ~(0x1 << gpio_num);
-        GpioCtrlRegs.GPCPUD.all |= pud_function << gpio_num;
+        GpioCtrlRegs.GPCPUD.all &= ~(0x1 << (gpio_num - 64));
+        GpioCtrlRegs.GPCPUD.all |= pud_function << (gpio_num - 64);
     }
     EDIS;
 }
@@ -95,11 +95,11 @@ void gpio_set_dat(unsigned int gpio_num, enum DATA_FUNCTIONS dat_function) {
         GpioDataRegs.GPADAT.all &= ~(0x1 << gpio_num);
         GpioDataRegs.GPADAT.all |= dat_function << gpio_num;
     } else if (gpio_num < 64) {
-        GpioDataRegs.GPBDAT.all &= ~(0x1 << gpio_num);
-        GpioDataRegs.GPBDAT.all |= dat_function << gpio_num;
+        GpioDataRegs.GPBDAT.all &= ~(0x1 << (gpio_num - 32));
+        GpioDataRegs.GPBDAT.all |= dat_function << (gpio_num - 32);
     } else {
-        GpioDataRegs.GPCDAT.all &= ~(0x1 << gpio_num);
-        GpioDataRegs.GPCDAT.all |= dat_function << gpio_num;
+        GpioDataRegs.GPCDAT.all &= ~(0x1 << (gpio_num - 64));
+        GpioDataRegs.GPCDAT.all |= dat_function << (gpio_num - 64);
     }
     EDIS;
 }
