@@ -32,11 +32,11 @@ void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function) {
 void gpio_set_qua(unsigned int gpio_num, unsigned int qua_function) {
     EALLOW;
     if (gpio_num < 32) {
-        GpioCtrlRegs.GPACTRL.all &= ~(0xF << ((unsigned int)((gpio_num + 1) / 8) * 4));
-        GpioCtrlRegs.GPACTRL.all |= qua_function << ((unsigned int)((gpio_num + 1) / 8) * 4);
+        GpioCtrlRegs.GPACTRL.all &= ~(0xFF << ((unsigned int)(gpio_num / 8) * 8));
+        GpioCtrlRegs.GPACTRL.all |= qua_function << ((unsigned int)(gpio_num / 8) * 8);
     } else {
-        GpioCtrlRegs.GPBCTRL.all &= ~(0xF << ((unsigned int)((gpio_num + 1) / 8) * 4));
-        GpioCtrlRegs.GPBCTRL.all |= qua_function << ((unsigned int)((gpio_num - 31) / 8) * 4);
+        GpioCtrlRegs.GPBCTRL.all &= ~(0xFF << ((unsigned int)((gpio_num - 32) / 8) * 8));
+        GpioCtrlRegs.GPBCTRL.all |= qua_function << ((unsigned int)((gpio_num - 32) / 8) * 8);
     }
     EDIS;
 }
