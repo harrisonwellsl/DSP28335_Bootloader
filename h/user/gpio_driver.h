@@ -18,11 +18,17 @@ enum DIR_FUNCTIONS {
     OUTPUT_DIR
 };
 
+enum DATA_FUNCTIONS {
+    RESET_BIT,
+    SET_BIT
+};
+
 
 void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function);
 void gpio_set_qua(unsigned int gpio_num, unsigned int qua_function);
 void gpio_set_dir(unsigned int gpio_num, enum DIR_FUNCTIONS dir_function);
 void gpio_set_qel(unsigned int gpio_num, enum QEL_FUNCTIONS qel_function);
 void gpio_set_pud(unsigned int gpio_num, enum PUD_FUNCTIONS pud_function);
+void gpio_set_dat(unsigned int gpio_num, enum DATA_FUNCTIONS dat_function);
 
 #endif /* __GPIO_DRIVER_H__ */
