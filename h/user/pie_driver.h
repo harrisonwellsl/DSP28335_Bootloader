@@ -40,5 +40,7 @@ unsigned int pie_vect(void);
 void pie_ack_clear(enum PIE_M pie_m);
 /* 获取PIEIFR的标志位 */
 int pie_flag_get(enum PIE_M pie_m, enum PIE_INTX_M pie_intx_m);
+/* 使能PIE的中断 */
+void pie_intx_enable(enum PIE_M pie_m, enum PIE_INTX_M, enum PIE_SEL pie_sel);
 
 #endif /* __PIE_DRIVER_H__ */
