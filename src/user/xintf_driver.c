@@ -8,10 +8,10 @@ void xintfInit(void)
 {
 	EALLOW;
 	/* XINTF配置 */
-	XintfRegs.XINTCNF2.bit.XTIMCLK = 0;			//����ϵͳ���ʱ�ӽ��з�Ƶ��ϵͳ���ʱ��ΪXINTF������ʱ��
-	XintfRegs.XINTCNF2.bit.WRBUFF = 0;			//��ʹ��д����
-	XintfRegs.XINTCNF2.bit.CLKOFF = 0;			//ʱ�����ʹ��
-	XintfRegs.XINTCNF2.bit.CLKMODE = 1;			//Xintf��XCLKOUT���ΪXTIMCLK/2
+	XintfRegs.XINTCNF2.bit.XTIMCLK = 0;
+	XintfRegs.XINTCNF2.bit.WRBUFF = 0;
+	XintfRegs.XINTCNF2.bit.CLKOFF = 0;
+	XintfRegs.XINTCNF2.bit.CLKMODE = 1;
 
 	/* Zone 0时序设置 */
 	XintfRegs.XTIMING0.bit.X2TIMING = 0;
