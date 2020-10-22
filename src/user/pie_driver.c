@@ -9,3 +9,7 @@ void pie_enable(enum PIE_SEL pie_sel) {
     PieCtrlRegs.PIECTRL.bit.ENPIE = pie_sel;
     EDIS;
 }
+
+unsigned int pie_vect(void) {
+    return PieCtrlRegs.PIECTRL.bit.PIEVECT;
+}
