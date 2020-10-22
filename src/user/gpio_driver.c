@@ -104,11 +104,35 @@ void gpio_set_dat(unsigned int gpio_num, enum DATA_FUNCTIONS dat_function) {
     EDIS;
 }
 
+void gpio_set_high(unsigned int gpio_num) {
+    if (gpio_num < 32) {
+        GpioDataRegs.GPASET.all |= 1 << gpio_num;
+    } else if (gpio_num < 64) {
+        GpioDataRegs.GPBSET.all |= 1 << (gpio_num - 32);
+    } else {
+        GpioDataRegs.GPCSET.all |= 1 << (gpio_num - 64);
+    }
+}
 
+void gpio_set_low(unsigned int gpio_num) {
+    if (gpio_num < 32) {
+        GpioDataRegs.GPACLEAR.all |= 1 << gpio_num;
+    } else if (gpio_num) {
+        GpioDataRegs.GPBCLEAR.all |= 1 << (gpio_num - 32);
+    } else {
+        GpioDataRegs.GPCCLEAR.all |= 1 << (gpio_num - 64);
+    }
+}
 
-
-
-
+void gpio_set_tog(unsigned int gpio_num) {
+    if (gpio_num < 32) {
+        GpioDataRegs.GPATOGGLE.all |= 1 << gpio_num;
+    } else if (gpio_num < 64) {
+        GpioDataRegs.GPBTOGGLE.all |= 1 << (gpio_num - 32);
+    } else {
+        GpioDataRegs.GPCTOGGLE.all |= 1 << (gpio_num - 64);
+    }
+}
 
 
 
