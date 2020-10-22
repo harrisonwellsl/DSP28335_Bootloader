@@ -13,3 +13,7 @@ void pie_enable(enum PIE_SEL pie_sel) {
 unsigned int pie_vect(void) {
     return PieCtrlRegs.PIECTRL.bit.PIEVECT;
 }
+
+void pie_ack_clear(enum PIE_ACK_M pie_ack_m) {
+    PieCtrlRegs.PIEACK.all |= pie_ack_m;
+}
