@@ -23,6 +23,11 @@ enum DATA_FUNCTIONS {
     SET_BIT
 };
 
+enum XINT_NUM {
+    XINT_1, XINT_2, XINT_3, XINT_4,
+    XINT_5, XINT_6, XINT_7, XINT_NMI
+};
+
 enum GPIO_NUM {
     GPIO_NUM_0, GPIO_NUM_1, GPIO_NUM_2, GPIO_NUM_3, GPIO_NUM_4, GPIO_NUM_5,
     GPIO_NUM_6, GPIO_NUM_7, GPIO_NUM_8, GPIO_NUM_9, GPIO_NUM_10, GPIO_NUM_11,
@@ -59,5 +64,9 @@ void gpio_set_high(enum GPIO_NUM gpio_num);
 void gpio_set_low(enum GPIO_NUM gpio_num);
 /* 翻转GPIO口输出的电平 */
 void gpio_set_tog(enum GPIO_NUM gpio_num);
+/* 为中断选择触发端口，GPIOA组（0-31）可选择中断1，2或者XNMI，其余只能选择3到7 */
+void gpio_int_select(enum GPIO_NUM gpio_num, enum XINT_NUM xint_num);
+/* 设置将设备从睡眠模式唤醒的引脚，只能选择GPIOA组（0-31） */
+void gpio_dev_wake(enum GPIO_NUM gpio_num);
 
 #endif /* __GPIO_DRIVER_H__ */
