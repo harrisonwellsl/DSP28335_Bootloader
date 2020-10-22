@@ -2,9 +2,11 @@
  * main.c
  */
 #include <string.h>
-#include <user/sys_clk_driver.h>
 
 #include "ti/DSP2833x_Device.h"
+
+#include "user/watchdog_driver.h"
+#include "user/sys_clk_driver.h"
 
 
 int main(void) {
