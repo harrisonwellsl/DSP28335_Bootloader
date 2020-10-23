@@ -42,5 +42,7 @@ void pie_ack_clear(enum PIE_M pie_m);
 int pie_flag_get(enum PIE_M pie_m, enum PIE_INTX_M pie_intx_m);
 /* 使能PIE的中断 */
 void pie_intx_enable(enum PIE_M pie_m, enum PIE_INTX_M, enum PIE_SEL pie_sel);
+/* 使能CPU中断 */
+void cpu_int_enable(enum PIE_M pie_m);
 
 #endif /* __PIE_DRIVER_H__ */

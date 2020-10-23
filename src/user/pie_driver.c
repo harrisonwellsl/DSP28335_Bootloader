@@ -3,6 +3,8 @@
 #include "user/pie_driver.h"
 
 extern volatile struct PIE_CTRL_REGS PieCtrlRegs;
+extern cregister volatile unsigned int IER;
+extern cregister volatile unsigned int IFR;
 
 void pie_enable(enum PIE_SEL pie_sel) {
     EALLOW;
@@ -121,10 +123,9 @@ void pie_intx_enable(enum PIE_M pie_m, enum PIE_INTX_M pie_intx_m, enum PIE_SEL 
     }
 }
 
-
-
-
-
+void cpu_int_enable(enum PIE_M pie_m) {
+    IER |= pie_m;
+}
 
 
 
