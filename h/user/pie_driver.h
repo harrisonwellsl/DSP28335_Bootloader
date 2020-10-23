@@ -48,9 +48,12 @@ void cpu_int_enable(enum PIE_M pie_m);
 void cpu_int_disable(enum PIE_M pie_m);
 /* 获取CPU中断标志位 */
 unsigned int cpu_flag_get(enum PIE_M pie_m);
+
+#if 0
 /* 使能DBGIER */
 void dbg_int_enable(enum PIE_M pie_m);
 /* 禁止DBGIER */
-void dbg_int_disable(enum PIE_M pie_m)；
+void dbg_int_disable(enum PIE_M pie_m);
+#endif
 
 #endif /* __PIE_DRIVER_H__ */

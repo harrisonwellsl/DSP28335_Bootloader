@@ -108,6 +108,7 @@ void gpio_set_dat(unsigned int gpio_num, enum DATA_FUNCTIONS dat_function) {
 }
 
 void gpio_set_high(unsigned int gpio_num) {
+    EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPASET.all |= 1 << gpio_num;
     } else if (gpio_num < 64) {
@@ -115,9 +116,11 @@ void gpio_set_high(unsigned int gpio_num) {
     } else {
         GpioDataRegs.GPCSET.all |= 1 << (gpio_num - 64);
     }
+    EDIS;
 }
 
 void gpio_set_low(unsigned int gpio_num) {
+    EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPACLEAR.all |= 1 << gpio_num;
     } else if (gpio_num) {
@@ -125,9 +128,11 @@ void gpio_set_low(unsigned int gpio_num) {
     } else {
         GpioDataRegs.GPCCLEAR.all |= 1 << (gpio_num - 64);
     }
+    EDIS;
 }
 
 void gpio_set_tog(unsigned int gpio_num) {
+    EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPATOGGLE.all |= 1 << gpio_num;
     } else if (gpio_num < 64) {
@@ -135,59 +140,79 @@ void gpio_set_tog(unsigned int gpio_num) {
     } else {
         GpioDataRegs.GPCTOGGLE.all |= 1 << (gpio_num - 64);
     }
+    EDIS;
 }
 
 void gpio_int_select(enum GPIO_NUM gpio_num, enum XINT_NUM xint_num) {
+    EALLOW;
     if (gpio_num < 32 && xint_num != XINT_NMI) {
         if (xint_num > XINT_2) {
+            EDIS;
             return;
         } else {
             switch (xint_num) {
             case XINT_1:
                 GpioIntRegs.GPIOXINT1SEL.all = gpio_num;
+                EDIS;
                 break;
             case XINT_2:
                 GpioIntRegs.GPIOXINT2SEL.all = gpio_num;
+                EDIS;
                 break;
             default:
+                EDIS;
                 break;
             }
         }
     } else if (gpio_num < 64 && xint_num != XINT_NMI) {
         if (xint_num < XINT_3) {
+            EDIS;
             return;
         } else {
             switch (xint_num) {
             case XINT_3:
                 GpioIntRegs.GPIOXINT3SEL.all = gpio_num;
+                EDIS;
                 break;
             case XINT_4:
                 GpioIntRegs.GPIOXINT4SEL.all = gpio_num;
+                EDIS;
                 break;
             case XINT_5:
                 GpioIntRegs.GPIOXINT5SEL.all = gpio_num;
+                EDIS;
                 break;
             case XINT_6:
                 GpioIntRegs.GPIOXINT6SEL.all = gpio_num;
+                EDIS;
                 break;
             case XINT_7:
                 GpioIntRegs.GPIOXINT7SEL.all = gpio_num;
+                EDIS;
                 break;
             default:
+                EDIS;
                 break;
             }
         }
     } else if (gpio_num < 32  && xint_num == XINT_NMI) {
         GpioIntRegs.GPIOXNMISEL.all = gpio_num;
+        EDIS;
+        return;
     } else {
+        EDIS;
         return;
     }
 }
 
 void gpio_dev_wake(enum GPIO_NUM gpio_num) {
+    EALLOW;
     if (gpio_num < 32) {
         GpioIntRegs.GPIOLPMSEL.all = gpio_num;
+        EDIS;
+        return;
     } else {
+        EDIS;
         return;
     }
 }
