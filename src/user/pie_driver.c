@@ -5,6 +5,7 @@
 extern volatile struct PIE_CTRL_REGS PieCtrlRegs;
 extern cregister volatile unsigned int IER;
 extern cregister volatile unsigned int IFR;
+extern cregister volatile unsigned int DBGIER;
 
 void pie_enable(enum PIE_SEL pie_sel) {
     EALLOW;
@@ -136,6 +137,11 @@ unsigned int cpu_flag_get(enum PIE_M pie_m) {
     return (flag >> pie_m) & 0x1;
 }
 
+void dbg_int_enable(enum PIE_M pie_m) {
+    DBGIER |= pie_m;
+}
 
-
+void dbg_int_disable(enum PIE_M pie_m) {
+    DBGIER &= ~pie_m;
+}
 
