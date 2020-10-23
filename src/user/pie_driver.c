@@ -127,7 +127,9 @@ void cpu_int_enable(enum PIE_M pie_m) {
     IER |= pie_m;
 }
 
-
+void cpu_int_disable(enum PIE_M pie_m) {
+    IER &= ~pie_m;
+}
 
 
 
