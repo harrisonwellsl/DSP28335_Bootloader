@@ -131,7 +131,10 @@ void cpu_int_disable(enum PIE_M pie_m) {
     IER &= ~pie_m;
 }
 
-
+unsigned int cpu_flag_get(enum PIE_M pie_m) {
+    unsigned int flag = IFR;
+    return (flag >> pie_m) & 0x1;
+}
 
 
 

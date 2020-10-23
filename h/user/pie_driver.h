@@ -46,5 +46,9 @@ void pie_intx_enable(enum PIE_M pie_m, enum PIE_INTX_M, enum PIE_SEL pie_sel);
 void cpu_int_enable(enum PIE_M pie_m);
 /* 禁止CPU中断 */
 void cpu_int_disable(enum PIE_M pie_m);
+/* 获取CPU中断标志位 */
+unsigned int cpu_flag_get(enum PIE_M pie_m);
+/* 使能DBGIER */
+void dbg_int_enable(enum PIE_M pie_m);
 
 #endif /* __PIE_DRIVER_H__ */
