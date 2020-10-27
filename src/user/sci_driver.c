@@ -35,4 +35,13 @@ void sci_init(enum SCI_DEVICE sci_device, SCI_ATTR* sci_attr) {
     sci_dev[sci_device]->sci_loopback_en = sci_attr->sci_loopback_en;
     sci_dev[sci_device]->sci_mode_sel = sci_attr->sci_mode_sel;
     sci_dev[sci_device]->sci_char_len = sci_attr->sci_char_len;
+
+    EALLOW;
+    sci_dev[sci_device]->sci_regs->SCICCR.bit.STOPBITS = sci_dev[sci_device]->sci_stop_bit;
+    sci_dev[sci_device]->sci_regs->SCICCR.bit.PARITY = sci_dev[sci_device]->sci_parity;
+    sci_dev[sci_device]->sci_regs->SCICCR.bit.PARITYENA = sci_dev[sci_device]->sci_parity_en;
+    sci_dev[sci_device]->sci_regs->SCICCR.bit.LOOPBKENA = sci_dev[sci_device]->sci_loopback_en;
+    sci_dev[sci_device]->sci_regs->SCICCR.bit.ADDRIDLE_MODE = sci_dev[sci_device]->sci_mode_sel;
+    sci_dev[sci_device]->sci_regs->SCICCR.bit.SCICHAR = sci_dev[sci_device]->sci_char_len;
+    EDIS;
 }
