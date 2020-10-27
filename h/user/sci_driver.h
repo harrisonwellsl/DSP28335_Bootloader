@@ -36,6 +36,16 @@ enum SCI_DEVICE {
     SCI_B,
     SCI_C
 };
+
+typedef struct _SCI_ATTR {
+    enum SCI_STOP_BIT sci_stop_bit;
+    enum SCI_PARITY sci_parity;
+    enum SCI_PARITY_EN sci_parity_en;
+    enum SCI_LOOPBACK_EN sci_loopback_en;
+    enum SCI_MODE_SEL sci_mode_sel;
+    enum SCI_CHAR_LEN sci_char_len;
+} SCI_ATTR;
+
 typedef void (*int_func_ptr)(void *);
 
 typedef struct _SCI_DEV {
@@ -49,5 +59,8 @@ typedef struct _SCI_DEV {
     void* int_arg;
     int_func_ptr int_func;
 } SCI_DEV;
+
+/* 初始化SCI设备 */
+void sci_init(enum SCI_DEVICE sci_device, SCI_ATTR* sci_attr);
 
 #endif /* __SCI_DRIVER_H__ */
