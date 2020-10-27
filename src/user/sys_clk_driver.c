@@ -6,15 +6,13 @@
 extern volatile struct SYS_CTRL_REGS SysCtrlRegs;
 
 /* 设置时钟，时钟=外部振荡频率*muti/div */
-int set_sys_clk(enum OSCCLK_MULTI muti, enum OSCCLK_DIV div)
-{
+int set_sys_clk(enum OSCCLK_MULTI muti, enum OSCCLK_DIV div) {
 	EALLOW;
 	Uint16 timeOut = 0;
 	while (SysCtrlRegs.PLLSTS.bit.MCLKSTS == 1 && (timeOut++ < 65535));
 	if (timeOut >= 65535) return -1;
 
-	if (SysCtrlRegs.PLLSTS.bit.DIVSEL == 2 || SysCtrlRegs.PLLSTS.bit.DIVSEL == 3)
-	{
+	if (SysCtrlRegs.PLLSTS.bit.DIVSEL == 2 || SysCtrlRegs.PLLSTS.bit.DIVSEL == 3) {
 		SysCtrlRegs.PLLSTS.bit.DIVSEL = 0;
 	}
 

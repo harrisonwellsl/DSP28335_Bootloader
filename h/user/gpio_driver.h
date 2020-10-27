@@ -28,6 +28,18 @@ enum XINT_NUM {
     XINT_5, XINT_6, XINT_7, XINT_NMI
 };
 
+enum XINT_POLARITY {
+    FAILING_EDGE0,
+    RAISING_EDGE,
+    FAILING_EDGE2,
+    FAILING_OR_RISING
+};
+
+enum XINT_SEL {
+    XINT_DISABLE,
+    XINT_ENABLE
+};
+
 enum GPIO_NUM {
     GPIO_NUM_0, GPIO_NUM_1, GPIO_NUM_2, GPIO_NUM_3, GPIO_NUM_4, GPIO_NUM_5,
     GPIO_NUM_6, GPIO_NUM_7, GPIO_NUM_8, GPIO_NUM_9, GPIO_NUM_10, GPIO_NUM_11,
@@ -68,5 +80,7 @@ void gpio_set_tog(enum GPIO_NUM gpio_num);
 void gpio_int_select(enum GPIO_NUM gpio_num, enum XINT_NUM xint_num);
 /* 设置将设备从睡眠模式唤醒的引脚，只能选择GPIOA组（0-31） */
 void gpio_dev_wake(enum GPIO_NUM gpio_num);
+/* 设置XINT的触发方式和使能 */
+void xintx_config(enum XINT_NUM xint_num, enum XINT_SEL xint_sel, enum XINT_POLARITY xint_polarity);
 
 #endif /* __GPIO_DRIVER_H__ */

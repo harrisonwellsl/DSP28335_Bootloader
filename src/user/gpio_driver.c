@@ -7,6 +7,7 @@
 extern volatile struct GPIO_CTRL_REGS GpioCtrlRegs;
 extern volatile struct GPIO_DATA_REGS GpioDataRegs;
 extern volatile struct GPIO_INT_REGS  GpioIntRegs;
+extern volatile struct XINTRUPT_REGS  XIntruptRegs;
 
 void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function) {
     EALLOW;
@@ -218,7 +219,54 @@ void gpio_dev_wake(enum GPIO_NUM gpio_num) {
 }
 
 
-
+void xintx_config(enum XINT_NUM xint_num, enum XINT_SEL xint_sel, enum XINT_POLARITY xint_polarity) {
+    EALLOW;
+    switch (xint_num) {
+    case XINT_1:
+        XIntruptRegs.XINT1CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT1CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_2:
+        XIntruptRegs.XINT2CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT2CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_3:
+        XIntruptRegs.XINT3CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT3CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_4:
+        XIntruptRegs.XINT4CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT4CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_5:
+        XIntruptRegs.XINT5CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT5CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_6:
+        XIntruptRegs.XINT6CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT6CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_7:
+        XIntruptRegs.XINT7CR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XINT7CR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    case XINT_NMI:
+        XIntruptRegs.XNMICR.bit.POLARITY = xint_polarity;
+        XIntruptRegs.XNMICR.bit.ENABLE = xint_sel;
+        EDIS;
+        break;
+    default:
+        EDIS;
+        break;
+    }
+}
 
 
 
