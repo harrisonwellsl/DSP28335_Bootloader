@@ -1,6 +1,33 @@
 #ifndef __SCI_DRIVER_H__
 #define __SCI_DRIVER_H__
 
+enum SCI_STOP_BIT {
+    ONE_STOP_BIT,
+    TWO_STOP_BIT
+};
 
+enum SCI_PARITY {
+    ODD_PARITY,
+    EVEN_PARITY
+};
 
+enum SCI_PARITY_EN {
+    PARITY_DISABLE,
+    PARITY_ENABEL
+};
+
+enum SCI_LOOPBACK_EN {
+    LOOPBACK_DISABLE,
+    LOOPBACK_ENABLE
+};
+
+enum SCI_MODE_SEL {
+    IDLE_LINE,
+    ADDR_BIT
+};
+
+enum SCI_CHAR_LEN {
+    BIT_1, BIT_2, BIT_3, BIT_4,
+    BIT_5, BIT_6, BIT_7, BIT_8
+};
 #endif /* __SCI_DRIVER_H__ */
