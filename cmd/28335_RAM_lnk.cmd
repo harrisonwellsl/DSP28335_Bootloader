@@ -77,7 +77,7 @@
          if required to create a larger memory block.
 */
 
-
+-heap 0x400
 MEMORY
 {
 PAGE 0 :

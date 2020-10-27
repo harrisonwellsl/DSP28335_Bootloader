@@ -6,9 +6,9 @@
 #define LSPCLK_DIV (4)
 
 /* 定义系统时钟，计算高低速外设时钟 */
-#define SYSCLK (75000000L)
-#define HSPCLK (SYSCLK / HSPCLK_DIV)
-#define LSPCLK (SYSCLK / LSPCLK_DIV)
+#define SYSCLK_SYS (75000000L)
+#define HSPCLK_SYS (SYSCLK_SYS / HSPCLK_DIV)
+#define LSPCLK_SYS (SYSCLK_SYS / LSPCLK_DIV)
 
 #define CPU_RATE 6.667L // for a 150MHz CPU clock speed
 //#define CPU_RATE 10.000L // for a 100MHz CPU clock speed

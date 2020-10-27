@@ -52,6 +52,9 @@ void sci_init(enum SCI_DEVICE sci_device, SCI_ATTR* sci_attr) {
     sci_dev[sci_device]->sci_regs->SCICTL1.bit.RXENA = 1;
     sci_dev[sci_device]->sci_regs->SCICTL1.bit.TXENA = 1;
 
-    sci_dev[sci_device]->sci_regs->SCIHBAUD = LSPCLK / (sci_dev[sci_device]->boundrate * 8) - 1;
+    sci_dev[sci_device]->sci_regs->SCIHBAUD =
+            ((LSPCLK_SYS / (sci_dev[sci_device]->boundrate * 8) - 1) >> 8) & 0xFF;
+    sci_dev[sci_device]->sci_regs->SCIHBAUD =
+            (LSPCLK_SYS / (sci_dev[sci_device]->boundrate * 8) - 1) & 0xFF;
     EDIS;
 }
