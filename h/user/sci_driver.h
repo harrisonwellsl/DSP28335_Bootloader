@@ -31,6 +31,11 @@ enum SCI_CHAR_LEN {
     BIT_5, BIT_6, BIT_7, BIT_8
 };
 
+enum SCI_DEVICE {
+    SCI_A,
+    SCI_B,
+    SCI_C
+};
 typedef void (*int_func_ptr)(void *);
 
 typedef struct _SCI_DEV {

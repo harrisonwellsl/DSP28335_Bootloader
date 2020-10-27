@@ -278,6 +278,7 @@ unsigned int xint_get_time_stamp(enum XINT_NUM xint_num) {
         return XIntruptRegs.XNMICTR;
     default:
         return 0xFFFF;
+    }
 }
 
 
