@@ -30,4 +30,19 @@ enum SCI_CHAR_LEN {
     BIT_1, BIT_2, BIT_3, BIT_4,
     BIT_5, BIT_6, BIT_7, BIT_8
 };
+
+typedef void (*int_func_ptr)(void *);
+
+typedef struct _SCI_DEV {
+    volatile struct SCI_REGS* sci_regs;
+    enum SCI_STOP_BIT sci_stop_bit;
+    enum SCI_PARITY sci_parity;
+    enum SCI_PARITY_EN sci_parity_en;
+    enum SCI_LOOPBACK_EN sci_loopback_en;
+    enum SCI_MODE_SEL sci_mode_sel;
+    enum SCI_CHAR_LEN sci_char_len;
+    void* int_arg;
+    int_func_ptr int_func;
+} SCI_DEV;
+
 #endif /* __SCI_DRIVER_H__ */
