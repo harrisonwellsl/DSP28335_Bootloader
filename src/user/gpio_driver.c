@@ -268,6 +268,18 @@ void xintx_config(enum XINT_NUM xint_num, enum XINT_SEL xint_sel, enum XINT_POLA
     }
 }
 
+unsigned int xint_get_time_stamp(enum XINT_NUM xint_num) {
+    switch (xint_num) {
+    case XINT_1:
+        return XIntruptRegs.XINT1CTR;
+    case XINT_2:
+        return XIntruptRegs.XINT1CTR;
+    case XINT_NMI:
+        return XIntruptRegs.XNMICTR;
+    default:
+        return 0xFFFF;
+}
+
 
 
 

@@ -82,5 +82,6 @@ void gpio_int_select(enum GPIO_NUM gpio_num, enum XINT_NUM xint_num);
 void gpio_dev_wake(enum GPIO_NUM gpio_num);
 /* 设置XINT的触发方式和使能 */
 void xintx_config(enum XINT_NUM xint_num, enum XINT_SEL xint_sel, enum XINT_POLARITY xint_polarity);
-
+/* 获取Xint1，2和NMI的时间戳 */
+unsigned int xint_get_time_stamp(enum XINT_NUM xint_num);
 #endif /* __GPIO_DRIVER_H__ */
