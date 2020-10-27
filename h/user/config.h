@@ -1,6 +1,15 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
+/* 定义高低速外设时钟的分频系数 */
+#define HSPCLK_DIV (2)
+#define LSPCLK_DIV (4)
+
+/* 定义系统时钟，计算高低速外设时钟 */
+#define SYSCLK (75000000L)
+#define HSPCLK (SYSCLK / HSPCLK_DIV)
+#define LSPCLK (SYSCLK / LSPCLK_DIV)
+
 #define CPU_RATE 6.667L // for a 150MHz CPU clock speed
 //#define CPU_RATE 10.000L // for a 100MHz CPU clock speed
 

@@ -38,6 +38,7 @@ enum SCI_DEVICE {
 };
 
 typedef struct _SCI_ATTR {
+    unsigned long boundrate;
     enum SCI_STOP_BIT sci_stop_bit;
     enum SCI_PARITY sci_parity;
     enum SCI_PARITY_EN sci_parity_en;
@@ -50,6 +51,7 @@ typedef void (*int_func_ptr)(void *);
 
 typedef struct _SCI_DEV {
     volatile struct SCI_REGS* sci_regs;
+    unsigned long boundrate;
     enum SCI_STOP_BIT sci_stop_bit;
     enum SCI_PARITY sci_parity;
     enum SCI_PARITY_EN sci_parity_en;
