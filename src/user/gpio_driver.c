@@ -9,7 +9,7 @@ extern volatile struct GPIO_DATA_REGS GpioDataRegs;
 extern volatile struct GPIO_INT_REGS  GpioIntRegs;
 extern volatile struct XINTRUPT_REGS  XIntruptRegs;
 
-void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function) {
+void gpio_set_mux(enum GPIO_NUM gpio_num, unsigned int mux_function) {
     EALLOW;
     if (gpio_num < 16) {
         GpioCtrlRegs.GPAMUX1.all &= ~(0x3 << (gpio_num * 2));
@@ -19,7 +19,7 @@ void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function) {
         GpioCtrlRegs.GPAMUX2.all |= mux_function << ((gpio_num - 16) * 2);
     } else if (gpio_num < 48) {
         GpioCtrlRegs.GPBMUX1.all &= ~(0x3 << ((gpio_num - 32) * 2));
-        GpioCtrlRegs.GPBMUX1.all |= mux_function << ((gpio_num - 32) - 48 * 2);
+        GpioCtrlRegs.GPBMUX1.all |= mux_function << ((gpio_num - 32) * 2);
     } else if (gpio_num < 64) {
         GpioCtrlRegs.GPBMUX2.all &= ~(0x3 << ((gpio_num - 48) * 2));
         GpioCtrlRegs.GPBMUX2.all |= mux_function << ((gpio_num - 48) * 2);
@@ -33,7 +33,7 @@ void gpio_set_mux(unsigned int gpio_num, unsigned int mux_function) {
     EDIS;
 }
 
-void gpio_set_qua(unsigned int gpio_num, unsigned int qua_function) {
+void gpio_set_qua(enum GPIO_NUM gpio_num, unsigned int qua_function) {
     EALLOW;
     if (gpio_num < 32) {
         GpioCtrlRegs.GPACTRL.all &= ~(0xFF << ((unsigned int)(gpio_num / 8) * 8));
@@ -45,7 +45,7 @@ void gpio_set_qua(unsigned int gpio_num, unsigned int qua_function) {
     EDIS;
 }
 
-void gpio_set_dir(unsigned int gpio_num, enum DIR_FUNCTIONS dir_function) {
+void gpio_set_dir(enum GPIO_NUM gpio_num, enum DIR_FUNCTIONS dir_function) {
     EALLOW;
     if (gpio_num < 32) {
         GpioCtrlRegs.GPADIR.all &= ~(0x1 << gpio_num);
@@ -60,7 +60,7 @@ void gpio_set_dir(unsigned int gpio_num, enum DIR_FUNCTIONS dir_function) {
     EDIS;
 }
 
-void gpio_set_qel(unsigned int gpio_num, enum QEL_FUNCTIONS qel_function) {
+void gpio_set_qel(enum GPIO_NUM gpio_num, enum QEL_FUNCTIONS qel_function) {
     EALLOW;
     if (gpio_num < 16) {
         GpioCtrlRegs.GPAQSEL1.all &= ~(0x3 << (gpio_num * 2));
@@ -78,7 +78,7 @@ void gpio_set_qel(unsigned int gpio_num, enum QEL_FUNCTIONS qel_function) {
     EDIS;
 }
 
-void gpio_set_pud(unsigned int gpio_num, enum PUD_FUNCTIONS pud_function) {
+void gpio_set_pud(enum GPIO_NUM gpio_num, enum PUD_FUNCTIONS pud_function) {
     EALLOW;
     if (gpio_num < 32) {
         GpioCtrlRegs.GPAPUD.all &= ~(0x1 << gpio_num);
@@ -93,7 +93,7 @@ void gpio_set_pud(unsigned int gpio_num, enum PUD_FUNCTIONS pud_function) {
     EDIS;
 }
 
-void gpio_set_dat(unsigned int gpio_num, enum DATA_FUNCTIONS dat_function) {
+void gpio_set_dat(enum GPIO_NUM gpio_num, enum DATA_FUNCTIONS dat_function) {
     EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPADAT.all &= ~(0x1 << gpio_num);
@@ -108,7 +108,7 @@ void gpio_set_dat(unsigned int gpio_num, enum DATA_FUNCTIONS dat_function) {
     EDIS;
 }
 
-void gpio_set_high(unsigned int gpio_num) {
+void gpio_set_high(enum GPIO_NUM gpio_num) {
     EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPASET.all |= 1 << gpio_num;
@@ -120,7 +120,7 @@ void gpio_set_high(unsigned int gpio_num) {
     EDIS;
 }
 
-void gpio_set_low(unsigned int gpio_num) {
+void gpio_set_low(enum GPIO_NUM gpio_num) {
     EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPACLEAR.all |= 1 << gpio_num;
@@ -132,7 +132,7 @@ void gpio_set_low(unsigned int gpio_num) {
     EDIS;
 }
 
-void gpio_set_tog(unsigned int gpio_num) {
+void gpio_set_tog(enum GPIO_NUM gpio_num) {
     EALLOW;
     if (gpio_num < 32) {
         GpioDataRegs.GPATOGGLE.all |= 1 << gpio_num;

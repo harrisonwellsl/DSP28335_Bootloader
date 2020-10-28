@@ -64,5 +64,6 @@ typedef struct _SCI_DEV {
 
 /* 初始化SCI设备 */
 void sci_init(enum SCI_DEVICE sci_device, SCI_ATTR* sci_attr);
+void sci_gpio_init(enum SCI_DEVICE sci_device);
 
 #endif /* __SCI_DRIVER_H__ */

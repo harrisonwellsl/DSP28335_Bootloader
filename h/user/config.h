@@ -6,7 +6,7 @@
 #define LSPCLK_DIV (4)
 
 /* 定义系统时钟，计算高低速外设时钟 */
-#define SYSCLK_SYS (75000000L)
+#define SYSCLK_SYS (150000000L)
 #define HSPCLK_SYS (SYSCLK_SYS / HSPCLK_DIV)
 #define LSPCLK_SYS (SYSCLK_SYS / LSPCLK_DIV)
 
@@ -44,7 +44,7 @@
 //#define USE_EPWM_1
 
 /* PCLKCR3相关的外设时钟 */
-//#define USE_GPIO_IN
+#define USE_GPIO_IN
 //#define USE_XINTF
 //#define USE_DMA
 //#define USE_CPU_TIMER_2

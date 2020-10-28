@@ -4,6 +4,7 @@
 #include "ti/DSP2833x_Device.h"
 
 #include "user/config.h"
+#include "user/gpio_driver.h"
 #include "user/sci_driver.h"
 
 SCI_DEV* sci_dev[3] = {NULL, NULL, NULL};
@@ -54,7 +55,7 @@ void sci_init(enum SCI_DEVICE sci_device, SCI_ATTR* sci_attr) {
 
     sci_dev[sci_device]->sci_regs->SCIHBAUD =
             ((LSPCLK_SYS / (sci_dev[sci_device]->boundrate * 8) - 1) >> 8) & 0xFF;
-    sci_dev[sci_device]->sci_regs->SCIHBAUD =
+    sci_dev[sci_device]->sci_regs->SCILBAUD =
             (LSPCLK_SYS / (sci_dev[sci_device]->boundrate * 8) - 1) & 0xFF;
 
     /* 让发送FIFO处于复位状态，等待配置完成后释放 */
@@ -91,6 +92,27 @@ void sci_init(enum SCI_DEVICE sci_device, SCI_ATTR* sci_attr) {
     sci_dev[sci_device]->sci_regs->SCIFFTX.bit.SCIFFENA = 1;
 
     /* 使能中断 */
-    sci_dev[sci_device]->sci_regs->SCICTL2.bit.RXBKINTENA = 1;
+//    sci_dev[sci_device]->sci_regs->SCICTL2.bit.RXBKINTENA = 1;
     EDIS;
+}
+
+void sci_gpio_init(enum SCI_DEVICE sci_device) {
+    switch (sci_device) {
+    case SCI_A:
+        break;
+    case SCI_B:
+        break;
+    case SCI_C:
+        gpio_set_mux(GPIO_NUM_62, 0x1);
+        gpio_set_mux(GPIO_NUM_63, 0x1);
+        gpio_set_pud(GPIO_NUM_62, PUD_ENABLE);
+        gpio_set_pud(GPIO_NUM_63, PUD_ENABLE);
+        gpio_set_qel(GPIO_NUM_62, ASYNCHRONOUS);
+        gpio_set_qel(GPIO_NUM_63, ASYNCHRONOUS);
+        gpio_set_dir(GPIO_NUM_62, INPUT_DIR);
+        gpio_set_dir(GPIO_NUM_63, OUTPUT_DIR);
+        break;
+    default:
+        break;
+    }
 }
